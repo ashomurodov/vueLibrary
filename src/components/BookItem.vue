@@ -2,12 +2,22 @@
 	<div class="book-container">
 		<span class="img"></span>
 		<div class="bookDetails">
-			<h3>Book Title</h3>
-			<p>Book Description</p>
+			<h3>{{ props.book.volumeInfo.title }}</h3>
+			<div class="authors">
+				<p v-for="author of props.book.volumeInfo.authors" :key="author + Date.now()">
+					{{ author }}
+				</p>
+			</div>
 		</div>
 	</div>
 </template>
-<script></script>
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps({
+	book: Object,
+});
+</script>
 <style scoped>
 * {
 	margin: 0;
@@ -33,7 +43,7 @@
 }
 
 h3 {
-	font-size: 40px;
+	font-size: 20px;
 }
 
 p {
