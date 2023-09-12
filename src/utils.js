@@ -14,3 +14,17 @@ export const formatDate = (inputDate) => {
 
 	return `${day}.${month}.${year}`;
 };
+
+export const isValidToken = (token) => {
+	const pattern = /^[a-zA-Z]{16}$/;
+
+	return pattern.test(token);
+};
+
+export const timer = async (time) => {
+	await new Promise((res) =>
+		setTimeout(() => {
+			res("something is happening");
+		}, time)
+	);
+};

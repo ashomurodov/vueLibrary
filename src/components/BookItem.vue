@@ -41,7 +41,7 @@ const props = defineProps({
 	align-items: center;
 	border: 2px solid #2c3e50;
 	width: 300px;
-	height: 500px;
+	height: 450px;
 	background-color: #f3f3f3;
 	padding: 20px;
 	font-family: sans-serif;
@@ -50,14 +50,14 @@ const props = defineProps({
 @media screen and (max-width: 1790px) {
 	.book-container {
 		width: 350px;
-		height: 470px;
+		height: 430px;
 	}
 }
 
 @media screen and (max-width: 1680px) {
 	.book-container {
 		width: 430px;
-		height: 570px;
+		height: 520px;
 	}
 
 	h3,
@@ -67,7 +67,24 @@ const props = defineProps({
 }
 
 @media screen and (max-width: 1500px) {
-	
+	.book-container {
+		width: 400px;
+		height: 500px;
+	}
+}
+
+@media screen and (max-width: 1050px) {
+	.book-container {
+		width: 300px;
+		height: 430px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.book-container {
+		width: 250px;
+		height: 380px;
+	}
 }
 
 .bookDetails {

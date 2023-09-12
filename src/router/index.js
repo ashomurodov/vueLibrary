@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 // import BookSingle from "../pages/BookSingle.vue";
-import { BookSingle, BookTable } from "@/pages";
+import { BookSingle, BookTable, LoginPage } from "@/pages";
 
 const routes = [
 	{
 		path: "/",
 		name: "book",
 		component: BookTable,
+	},
+	{
+		path: "/login",
+		name: "login",
+		component: LoginPage,
 	},
 	{
 		path: "/book/:id",

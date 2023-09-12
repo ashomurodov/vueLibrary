@@ -1,17 +1,18 @@
 <template>
-	<div class="searchBar">
-		<form @submit.prevent="searchBooks">
-			<input type="text" v-model="SearchValue" />
-			<button>Submit</button>
-		</form>
-	</div>
+	<NavbarEl :handleSubmit="searchBooks" />
+
 	<h1>I'm BookTable</h1>
 	<template v-if="loader">
 		<div class="loader"><LoaderComponent :loading="loader" /></div>
 	</template>
-	<template v-else>
+	<template v-else-if="!loader && bookList">
 		<div class="bookMenu">
 			<BookItem v-for="(book, index) of bookList" :key="index" :book="bookMapper.Book(book)" />
+		</div>
+	</template>
+	<template v-else>
+		<div class="notFound">
+			<h1>Not Found</h1>
 		</div>
 	</template>
 </template>
@@ -19,26 +20,37 @@
 <script setup>
 import BookItem from "../components/BookItem.vue";
 import LoaderComponent from "../components/LoaderComponent.vue";
+import NavbarEl from "../components/NavbarEl.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { bookMapper } from "@/mappers";
 
-const SearchValue = ref("apple");
 const bookList = ref([]);
 const loader = ref(true);
 
-const searchBooks = async () => {
+const prevSearch = ref("programming");
+
+prevSearch.value = localStorage.getItem("lastSearch") ? localStorage.getItem("lastSearch") : "";
+
+const searchBooks = async (search = prevSearch.value) => {
+	console.log(
+		"SEARCH CALLED-> ",
+		"https://www.googleapis.com/books/v1/volumes?maxResults=30&q=" +
+			search +
+			"&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
+	);
+	prevSearch.value = search;
+	localStorage.setItem("lastSearch", search);
 	loader.value = true;
 	try {
 		const { data } = await axios.get(
-			"https://www.googleapis.com/books/v1/volumes?q=" +
-				SearchValue.value +
+			"https://www.googleapis.com/books/v1/volumes?maxResults=30&q=" +
+				search +
 				"&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
 		);
 		bookList.value = data.items;
 		loader.value = false;
 	} catch (error) {
-		console.log("ERRROOORRR");
 		console.log(error);
 		loader.value = false;
 	}
@@ -59,6 +71,13 @@ onMounted(() => {
 	place-items: center;
 	grid-template-columns: auto auto auto auto auto;
 	gap: 20px;
+	margin-top: 80px;
+}
+
+.notFound {
+	display: grid;
+	place-items: center;
+	height: 80vh;
 }
 
 @media screen and (max-width: 1790px) {

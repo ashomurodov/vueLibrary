@@ -4,6 +4,7 @@ export const Book = (item) => ({
 	id: get(item, "id") || "",
 	title: get(item, "volumeInfo.title") || "",
 	description: get(item, "volumeInfo.description") || "",
+	buyLink: get(item, "volumeInfo.canonicalVolumeLink") || "",
 	pageCount: get(item, "volumeInfo.pageCount") || "",
 	publishDate: get(item, "volumeInfo.publishedDate") || "",
 	language: get(item, "volumeInfo.language") || "",
