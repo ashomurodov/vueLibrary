@@ -18,12 +18,11 @@
 </template>
 
 <script setup>
-import BookItem from "../components/BookItem.vue";
-import LoaderComponent from "../components/LoaderComponent.vue";
-import NavbarEl from "../components/NavbarEl.vue";
-import { ref, onMounted } from "vue";
 import axios from "axios";
+
+import { ref, onMounted } from "vue";
 import { bookMapper } from "@/mappers";
+import { BookItem, LoaderComponent, NavbarEl } from "@/components";
 
 const bookList = ref([]);
 const loader = ref(true);

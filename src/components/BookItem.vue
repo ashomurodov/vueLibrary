@@ -47,46 +47,6 @@ const props = defineProps({
 	font-family: sans-serif;
 }
 
-@media screen and (max-width: 1790px) {
-	.book-container {
-		width: 350px;
-		height: 430px;
-	}
-}
-
-@media screen and (max-width: 1680px) {
-	.book-container {
-		width: 430px;
-		height: 520px;
-	}
-
-	h3,
-	.authors {
-		width: 350px;
-	}
-}
-
-@media screen and (max-width: 1500px) {
-	.book-container {
-		width: 400px;
-		height: 500px;
-	}
-}
-
-@media screen and (max-width: 1050px) {
-	.book-container {
-		width: 300px;
-		height: 430px;
-	}
-}
-
-@media screen and (max-width: 900px) {
-	.book-container {
-		width: 250px;
-		height: 380px;
-	}
-}
-
 .bookDetails {
 	display: flex;
 	flex-direction: column;
@@ -130,5 +90,45 @@ h3 {
 p {
 	font-size: 18px;
 	color: rgb(75, 75, 75);
+}
+
+@media screen and (max-width: 1790px) {
+	.book-container {
+		width: 350px;
+		height: 430px;
+	}
+}
+
+@media screen and (max-width: 1680px) {
+	.book-container {
+		width: 430px;
+		height: 520px;
+	}
+
+	h3,
+	.authors {
+		width: 350px;
+	}
+}
+
+@media screen and (max-width: 1500px) {
+	.book-container {
+		width: 400px;
+		height: 500px;
+	}
+}
+
+@media screen and (max-width: 1050px) {
+	.book-container {
+		width: 300px;
+		height: 430px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.book-container {
+		width: 250px;
+		height: 380px;
+	}
 }
 </style>

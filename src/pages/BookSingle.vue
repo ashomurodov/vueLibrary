@@ -1,9 +1,13 @@
 <template>
+	<!-- loader  -->
+
 	<template v-if="loader">
 		<div class="loader">
 			<LoaderComponent :loading="loader" />
 		</div>
 	</template>
+
+	<!-- main single book component  -->
 	<template v-else>
 		<div class="router">
 			<router-link style="text-align: start; color: #000; text-decoration: none" to="/"
@@ -48,11 +52,13 @@
 
 <script setup>
 import axios from "axios";
-import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+
 import { bookMapper } from "@/mappers";
-import LoaderComponent from "../components/LoaderComponent.vue";
 import { formatDate } from "../utils.js";
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+import { LoaderComponent } from "@/components";
 
 const route = useRoute();
 
@@ -80,6 +86,13 @@ onMounted(async () => {
 	padding: 0px 120px;
 	margin-top: 80px;
 	width: 400px;
+}
+
+h1 {
+	text-align: start;
+	margin-bottom: 40px;
+	font-size: 60px;
+	color: #17bb7f;
 }
 
 .router span {
@@ -118,16 +131,16 @@ button:hover {
 	border: 3px dashed #17bb7f;
 }
 
-h1 {
-	text-align: start;
-	margin-bottom: 40px;
-	font-size: 60px;
-	color: #17bb7f;
-}
 .loader {
 	display: grid;
 	place-items: center;
 	height: 100vh;
+}
+
+.img-container img {
+	width: 300px;
+	object-fit: cover;
+	border: 10px dotted #17bb7f;
 }
 
 .aboutBook {
@@ -138,10 +151,24 @@ h1 {
 	overflow: hidden;
 }
 
-.img-container img {
-	width: 300px;
-	object-fit: cover;
-	border: 10px dotted #17bb7f;
+@media screen and (max-width: 1050px) {
+	h1 {
+		font-size: 40px;
+		margin-top: 30px;
+	}
+
+	.router {
+		padding: 0px 40px;
+		width: 250px;
+		font-size: 12px;
+	}
+	.container {
+		padding: 10px 40px;
+	}
+	.aboutBook {
+		flex-direction: column;
+		height: auto;
+	}
 }
 
 .about-container .text-container {
@@ -157,19 +184,15 @@ h1 {
 	gap: 20px;
 }
 
-.author-container {
-	display: flex;
-	gap: 15px;
-}
-
-/* .description {
-	width: 500px;
-} */
-
 .about-container h6 {
 	font-size: 20px;
 	color: #0d1e18b0;
 	font-weight: 500;
+}
+
+.author-container {
+	display: flex;
+	gap: 15px;
 }
 
 h6.description__title {

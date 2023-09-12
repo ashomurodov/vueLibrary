@@ -4,7 +4,7 @@
 			<p>Read<span class="logo_green">Zen!</span></p>
 		</div>
 		<div class="searchComponent">
-			<form @submit.prevent="() => handleSubmit(inputValue)">
+			<form @submit.prevent="() => props.handleSubmit(inputValue)">
 				<input v-model="inputValue" type="text" placeholder="Search and press enter..." />
 			</form>
 		</div>
@@ -51,9 +51,8 @@ const handleLogOut = () => {
 	localStorage.removeItem("username");
 	router.push("/login");
 };
-
-console.log(props);
 </script>
+
 <style scoped>
 .container {
 	width: 100%;
@@ -123,5 +122,27 @@ input {
 	border: 2px solid #ff0000;
 	color: #ff0000;
 	background-color: #fff;
+}
+
+@media screen and (max-width: 931px) {
+	input {
+		width: 150px;
+	}
+
+	.user_profile p {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 595px) {
+	.userNameFirstCase {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 460px) {
+	.logo {
+		display: none;
+	}
 }
 </style>

@@ -2,8 +2,8 @@
 	<div class="login">
 		<form @submit.prevent="handleSubmit">
 			<span>Login</span>
-			<input v-model="username" type="text" name="username" placeholder="Username" />
-			<input v-model="userToken" type="text" name="token" placeholder="Token" />
+			<input v-model="username" type="text" name="username" placeholder="Username" required />
+			<input v-model="userToken" type="text" name="token" placeholder="Token" required />
 			<button :disabled="loader">Submit</button>
 		</form>
 	</div>
