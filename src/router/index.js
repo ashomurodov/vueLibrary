@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import BookSingle from "../pages/BookSingle.vue";
 import { BookSingle, BookTable, LoginPage } from "@/pages";
 
 const routes = [

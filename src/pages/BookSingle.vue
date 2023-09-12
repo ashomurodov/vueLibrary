@@ -78,7 +78,6 @@ onMounted(async () => {
 .container {
 	padding: 20px 120px;
 }
-
 .router {
 	display: flex;
 	justify-content: flex-start;
