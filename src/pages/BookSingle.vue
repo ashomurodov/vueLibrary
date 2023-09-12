@@ -47,18 +47,23 @@
 				</div>
 			</div>
 		</div>
+		<div class="sr_books">
+			<h5>Maybe you like it!</h5>
+			<div>
+				<BookItem v-for="(book, index) of books" :key="index" :book="book" />
+			</div>
+		</div>
 	</template>
 </template>
 
 <script setup>
 import axios from "axios";
-
+import { ref, onMounted, watch } from "vue";
 import { bookMapper } from "@/mappers";
 import { formatDate } from "../utils.js";
-import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import { LoaderComponent } from "@/components";
+import { LoaderComponent, BookItem } from "@/components";
 
 const route = useRoute();
 
@@ -66,12 +71,46 @@ const qparam = ref(route.params.id);
 const book = ref([]);
 const loader = ref(true);
 
-onMounted(async () => {
-	const { data } = await axios.get(`https://www.googleapis.com/books/v1/volumes/${qparam.value}`);
+const books = ref([]);
 
-	book.value = bookMapper.Book(data);
-	loader.value = false;
+const fetchData = async () => {
+	loader.value = true;
+
+	try {
+		const { data } = await axios.get(`https://www.googleapis.com/books/v1/volumes/${qparam.value}`);
+		book.value = bookMapper.Book(data);
+
+		const { data: sr_books } = await axios.get(
+			"https://www.googleapis.com/books/v1/volumes?maxResults=2&q=" +
+				book.value.title.slice(0, 4) +
+				"&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
+		);
+
+		books.value = sr_books.items.map((book) => bookMapper.Book(book));
+	} catch (error) {
+		console.error("Error loading data:", error);
+	} finally {
+		loader.value = false;
+	}
+};
+
+onMounted(() => {
+	fetchData();
 });
+
+const watchRouteParams = () => {
+	watch(
+		() => route.params.id,
+		(newId, oldId) => {
+			if (newId !== oldId) {
+				qparam.value = newId;
+				fetchData();
+			}
+		}
+	);
+};
+
+watchRouteParams();
 </script>
 
 <style scoped>
@@ -150,6 +189,25 @@ button:hover {
 	overflow: hidden;
 }
 
+.sr_books {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 30px 120px;
+}
+
+.sr_books h5 {
+	font-size: 30px;
+	margin-bottom: 20px;
+	color: #17bb7f;
+}
+
+.sr_books div {
+	display: flex;
+	gap: 20px;
+}
+
 @media screen and (max-width: 1050px) {
 	h1 {
 		font-size: 40px;
@@ -160,6 +218,14 @@ button:hover {
 		padding: 0px 40px;
 		width: 250px;
 		font-size: 12px;
+	}
+
+	.sr_books {
+		padding: 20px 40px;
+	}
+
+	.sr_books div {
+		flex-direction: column;
 	}
 	.container {
 		padding: 10px 40px;

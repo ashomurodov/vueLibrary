@@ -123,6 +123,14 @@ p {
 		width: 300px;
 		height: 430px;
 	}
+
+	h3 {
+		width: 100px;
+	}
+
+	.authors {
+		width: 100px;
+	}
 }
 
 @media screen and (max-width: 900px) {
