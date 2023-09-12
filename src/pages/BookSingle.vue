@@ -71,6 +71,7 @@ const qparam = ref(route.params.id);
 const book = ref([]);
 const loader = ref(true);
 
+// Similiar to the fetched book
 const books = ref([]);
 
 const fetchData = async () => {
