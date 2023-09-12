@@ -26,6 +26,7 @@ const handleSubmit = async () => {
 
 			loader.value = false;
 			localStorage.setItem("token", userToken.value);
+			localStorage.setItem("username", username.value);
 			alert(`${username.value} you are registered successfully!`);
 			router.push("/");
 		} else {

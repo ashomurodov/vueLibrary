@@ -28,17 +28,13 @@ import { bookMapper } from "@/mappers";
 const bookList = ref([]);
 const loader = ref(true);
 
-const prevSearch = ref("programming");
+const prevSearch = ref("");
 
 prevSearch.value = localStorage.getItem("lastSearch") ? localStorage.getItem("lastSearch") : "";
 
 const searchBooks = async (search = prevSearch.value) => {
-	console.log(
-		"SEARCH CALLED-> ",
-		"https://www.googleapis.com/books/v1/volumes?maxResults=30&q=" +
-			search +
-			"&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
-	);
+	if (search.length <= 0) search = "programming";
+
 	prevSearch.value = search;
 	localStorage.setItem("lastSearch", search);
 	loader.value = true;
@@ -54,13 +50,10 @@ const searchBooks = async (search = prevSearch.value) => {
 		console.log(error);
 		loader.value = false;
 	}
-
-	console.log(bookList.value);
 };
 
 onMounted(() => {
 	searchBooks();
-	console.log("Mounted");
 });
 </script>
 

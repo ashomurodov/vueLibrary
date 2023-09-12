@@ -9,13 +9,13 @@
 			</form>
 		</div>
 		<div class="user">
-			<div class="user_profile">
-				<p>Ayyub</p>
-				<span class="userNameFirstCase">A</span>
-			</div>
 			<template v-if="isRegistered">
-				<div>
-					<button class="logout btn">Log Out</button>
+				<div class="reguser">
+					<div class="user_profile">
+						<p>{{ username }}</p>
+						<span class="userNameFirstCase">{{ firstCharacterOfUsername }}</span>
+					</div>
+					<button @click="handleLogOut" class="logout btn">Log Out</button>
 				</div>
 			</template>
 			<template v-else>
@@ -31,19 +31,26 @@
 
 <script setup>
 import { defineProps, ref } from "vue";
+import router from "@/router/index.js";
 
 const inputValue = ref("");
 const isRegistered = ref(false);
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("token") || "";
+const username = localStorage.getItem("username") || "";
+const firstCharacterOfUsername = username.length ? username[0] : "";
 
 isRegistered.value = !!token;
-
-console.log(token);
 
 const props = defineProps({
 	handleSubmit: Function,
 });
+
+const handleLogOut = () => {
+	localStorage.removeItem("token");
+	localStorage.removeItem("username");
+	router.push("/login");
+};
 
 console.log(props);
 </script>
@@ -91,6 +98,12 @@ input {
 	border-radius: 50%;
 }
 
+.reguser {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
 .user_profile {
 	display: flex;
 	gap: 10px;
@@ -104,5 +117,11 @@ input {
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 20px;
+}
+
+.btn.logout {
+	border: 2px solid #ff0000;
+	color: #ff0000;
+	background-color: #fff;
 }
 </style>
