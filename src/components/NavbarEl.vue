@@ -4,7 +4,7 @@
       <p>Read<span class="logo_green">Zen!</span></p>
     </div>
     <div class="searchComponent">
-      <form @submit.prevent="() => props.handleSubmit(inputValue)">
+      <form @submit.prevent="() => handleSubmit(inputValue)">
         <input v-model="inputValue" type="text" placeholder="Search and press enter..." />
       </form>
     </div>
@@ -28,8 +28,8 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { ref, type PropType } from "vue";
 import router from "@/router/index.js";
 
 const inputValue = ref("");
@@ -41,7 +41,10 @@ const firstCharacterOfUsername = token.length ? token[0] : "";
 isRegistered.value = !!token;
 
 const props = defineProps({
-  handleSubmit: Function,
+  handleSubmit: {
+    type: Function as PropType<(value: string) => void>, // Specify parameter and return types
+    required: true, // If it's required
+  },
 });
 
 const handleLogOut = () => {

@@ -7,7 +7,7 @@
     </form>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { isValidToken, timer } from "@/utils";
 import { ref } from "vue";
 import router from "@/router/index.js";
@@ -34,7 +34,7 @@ const handleSubmit = async () => {
       alert("Token incorrect, Please write 16 characters contains uppercase and lowercase");
       throw new Error("token is incorrect");
     }
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
   }
 };
