@@ -57,11 +57,11 @@
 </template>
 
 <script setup lang="ts">
-import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { bookMapper } from "@/mappers";
 import { formatDate } from "../utils.js";
 import { useRoute } from "vue-router";
+import http from "@/http";
 
 import { LoaderComponent, BookItem } from "@/components";
 import type { IEntity } from "@/types";
@@ -88,12 +88,12 @@ const fetchData = async () => {
   loader.value = true;
 
   try {
-    const { data } = await axios.get(`https://www.googleapis.com/books/v1/volumes/${qparam.value}`);
+    const { data } = await http.get(`/${qparam.value}`);
     console.log(data);
     book.value = bookMapper.Book(data);
 
-    const { data: sr_books } = await axios.get(
-      "https://www.googleapis.com/books/v1/volumes?maxResults=2&q=" +
+    const { data: sr_books } = await http.get(
+      "?maxResults=2&q=" +
         book.value.title.slice(0, 4) +
         "&key=AIzaSyBIse3aE94iDf4rmBaJwaA_XQzjLi2NQSI"
     );

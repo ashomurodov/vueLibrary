@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import axios from "axios";
+import http from "@/http";
 
 import { ref, onMounted } from "vue";
 import { bookMapper } from "@/mappers";
@@ -39,10 +40,8 @@ const searchBooks = async (search: string) => {
   prevSearch.value = search;
   loader.value = true;
   try {
-    const { data } = await axios.get(
-      "https://www.googleapis.com/books/v1/volumes?maxResults=30&q=" +
-        prevSearch.value +
-        "&key=AIzaSyBIse3aE94iDf4rmBaJwaA_XQzjLi2NQSI"
+    const { data } = await http.get(
+      "?maxResults=30&q=" + prevSearch.value + "&key=AIzaSyBIse3aE94iDf4rmBaJwaA_XQzjLi2NQSI"
     );
     bookList.value = data.items;
     loader.value = false;
