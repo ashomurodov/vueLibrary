@@ -31,17 +31,18 @@ const prevSearch = ref<String | null>("");
 
 prevSearch.value = localStorage.getItem("lastSearch") ? localStorage.getItem("lastSearch") : "";
 
-const searchBooks = async (search: string = String(prevSearch.value || "")) => {
-  if (!!search) search = "programming";
+const searchBooks = async (search: string) => {
+  if (!search) search = prevSearch.value ? String(prevSearch.value) : "programming";
+
+  localStorage.setItem("lastSearch", search);
 
   prevSearch.value = search;
-  localStorage.setItem("lastSearch", search);
   loader.value = true;
   try {
     const { data } = await axios.get(
       "https://www.googleapis.com/books/v1/volumes?maxResults=30&q=" +
-        search +
-        "&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
+        prevSearch.value +
+        "&key=AIzaSyBIse3aE94iDf4rmBaJwaA_XQzjLi2NQSI"
     );
     bookList.value = data.items;
     loader.value = false;
@@ -52,7 +53,7 @@ const searchBooks = async (search: string = String(prevSearch.value || "")) => {
 };
 
 onMounted(() => {
-  searchBooks();
+  searchBooks("");
 });
 </script>
 

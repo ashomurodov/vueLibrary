@@ -23,7 +23,7 @@
         <div class="about-container">
           <div class="book-authors text-container">
             <h6>Authors:</h6>
-            <p>{{ book.authors.length > 0 ? "" : "No Author" }}</p>
+            <p>{{ !!book.authors?.length ? "" : "No Author" }}</p>
             <div class="author-container">
               <p v-for="author of book.authors" :key="author + Date.now()">
                 {{ author }}
@@ -64,28 +64,41 @@ import { formatDate } from "../utils.js";
 import { useRoute } from "vue-router";
 
 import { LoaderComponent, BookItem } from "@/components";
+import type { IEntity } from "@/types";
 
 const route = useRoute();
 
 const qparam = ref(route.params.id);
-const book = ref<any>([]);
+const book = ref<IEntity.Book.Single>({
+  id: 0,
+  title: "",
+  image: "",
+  description: "",
+  authors: ["", ""],
+  buyLink: "",
+  previewLink: "",
+  publishDate: "",
+});
 const loader = ref<boolean>(true);
 
 // Similiar to the fetched book
-const books = ref([]);
+const books = ref<IEntity.Book.List>([]);
 
 const fetchData = async () => {
   loader.value = true;
 
   try {
     const { data } = await axios.get(`https://www.googleapis.com/books/v1/volumes/${qparam.value}`);
+    console.log(data);
     book.value = bookMapper.Book(data);
 
     const { data: sr_books } = await axios.get(
       "https://www.googleapis.com/books/v1/volumes?maxResults=2&q=" +
         book.value.title.slice(0, 4) +
-        "&key=AIzaSyBW-h2HJvTP6XspPZ6-24-csP_NGo8McZ8"
+        "&key=AIzaSyBIse3aE94iDf4rmBaJwaA_XQzjLi2NQSI"
     );
+
+    console.log(sr_books);
 
     books.value = sr_books.items.map((book: {}) => bookMapper.Book(book));
   } catch (error) {

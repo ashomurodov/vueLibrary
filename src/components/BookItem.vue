@@ -21,15 +21,10 @@
 </template>
 
 <script setup lang="ts">
-interface Book {
-  id: number;
-  title: string;
-  image: string;
-  authors: string[];
-}
+import type { IEntity } from "@/types";
 
 const props = defineProps({
-  book: Object as () => Book,
+  book: Object as () => IEntity.Book.Single,
 });
 </script>
 
