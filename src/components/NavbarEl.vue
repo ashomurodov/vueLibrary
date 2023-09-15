@@ -63,6 +63,7 @@ const handleLogOut = () => {
   padding: 10px 50px;
   box-shadow: 2px 4px 22px 0px rgba(0, 0, 0, 0.12);
   position: fixed;
+  z-index: 999;
   top: 0;
   background-color: #fff;
 }
@@ -122,6 +123,12 @@ input {
   border: 2px solid #ff0000;
   color: #ff0000;
   background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.btn.logout:hover {
+  background-color: #ff0000;
+  color: #fff;
 }
 
 @media screen and (max-width: 931px) {

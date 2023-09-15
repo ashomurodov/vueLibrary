@@ -82,20 +82,26 @@ onMounted(() => {
 @media screen and (max-width: 1680px) {
   .bookMenu {
     padding: 10px 65px;
-    grid-template-columns: auto auto auto;
   }
 }
 
 @media screen and (max-width: 1500px) {
   .bookMenu {
     padding: 10px 55px;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
   }
 }
 
 @media screen and (max-width: 1050px) {
   .bookMenu {
     padding: 10px 25px;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .bookMenu {
+    padding: 10px 20px;
     grid-template-columns: auto;
   }
 }

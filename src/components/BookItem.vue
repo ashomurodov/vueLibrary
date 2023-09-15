@@ -7,7 +7,7 @@
     </span>
     <div class="bookDetails">
       <h3>
-        <router-link style="text-decoration: none; color: black" :to="'/book/' + book?.id">{{
+        <router-link style="text-decoration: none; color: inherit" :to="'/book/' + book?.id">{{
           book?.title
         }}</router-link>
       </h3>
@@ -38,13 +38,14 @@ const props = defineProps({
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: center;
-  border: 2px solid #2c3e50;
+  align-items: flex-start;
+  border: 3px solid #17bb7f;
   width: 300px;
   height: 450px;
   background-color: #f3f3f3;
   padding: 20px;
   font-family: sans-serif;
+  border-radius: 8px;
 }
 
 .bookDetails {
@@ -56,8 +57,20 @@ const props = defineProps({
 
 .img {
   height: 80%;
-  width: 80%;
+  width: 100%;
   background-color: #17bb7f;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 8px 23px 0px rgba(66, 184, 131, 0.88);
+  -webkit-box-shadow: 0px 8px 23px 0px rgba(66, 184, 131, 0.88);
+  -moz-box-shadow: 0px 8px 23px 0px rgba(66, 184, 131, 0.88);
+  transition: all 0.3s ease;
+}
+
+.img:hover {
+  box-shadow: 0px 12px 40px 13px rgba(66, 184, 131, 0.47);
+  -webkit-box-shadow: 0px 12px 40px 13px rgba(66, 184, 131, 0.47);
+  -moz-box-shadow: 0px 12px 40px 13px rgba(66, 184, 131, 0.47);
 }
 
 .img img {
@@ -67,15 +80,21 @@ const props = defineProps({
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.img img:hover {
+  scale: 1.05;
 }
 
 h3 {
   font-size: 17px;
   white-space: nowrap;
   overflow: hidden;
+  color: #066f48;
   text-overflow: ellipsis;
   text-align: start;
-  width: 200px; /* Adjust the width to your desired value */
+  width: 200px;
 }
 
 .authors {
@@ -95,37 +114,34 @@ p {
 @media screen and (max-width: 1790px) {
   .book-container {
     width: 350px;
-    height: 430px;
+    height: 380px;
   }
 }
 
 @media screen and (max-width: 1680px) {
   .book-container {
-    width: 430px;
-    height: 520px;
+    width: 330px;
   }
 
   h3,
   .authors {
-    width: 350px;
+    width: 250px;
   }
 }
 
 @media screen and (max-width: 1500px) {
   .book-container {
-    width: 400px;
-    height: 500px;
+    width: 300px;
   }
 }
 
 @media screen and (max-width: 1050px) {
   .book-container {
     width: 300px;
-    height: 430px;
   }
 
   h3 {
-    width: 100px;
+    width: 180px;
   }
 
   .authors {
