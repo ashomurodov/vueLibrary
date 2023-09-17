@@ -32,18 +32,20 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userIsRegistered: { token: string; loginDate: string } = JSON.parse(
-    localStorage.getItem("token")!
+    localStorage.getItem("user_data")!
   );
 
   if (to.path === "/login") {
-    if (!userIsRegistered.token || isTokenExpired()) {
+    if (!localStorage.getItem("user_data")) {
       next();
     } else {
       next("/");
     }
   } else if (to.meta.requiresAuth) {
-    if (userIsRegistered.token && !isTokenExpired()) {
-      next();
+    if (userIsRegistered && userIsRegistered.token) {
+      if (!isTokenExpired()) {
+        next();
+      }
     } else {
       next("/login");
     }

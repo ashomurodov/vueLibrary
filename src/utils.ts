@@ -15,13 +15,17 @@ export const setLocalStore = (key: string, value: any) => {
 
 export const isTokenExpired = () => {
   const userIsRegistered: { token: string; loginDate: string } = JSON.parse(
-    localStorage.getItem("token")!
+    localStorage.getItem("user_data")!
   );
 
-  const nowDate = new Date();
-  const registeredDate = new Date(userIsRegistered.loginDate);
+  if (userIsRegistered) {
+    const nowDate = new Date();
+    const registeredDate = new Date(userIsRegistered.loginDate);
 
-  const difference = (Number(nowDate) - Number(registeredDate)) / (60 * 1000);
+    const difference = (Number(nowDate) - Number(registeredDate)) / (60 * 1000);
 
-  return difference >= 10;
+    return difference >= 10;
+  }
+
+  return null;
 };

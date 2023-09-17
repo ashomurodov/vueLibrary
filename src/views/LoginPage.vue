@@ -29,7 +29,7 @@ const inputValue = ref("");
 const handleSubmit = () => {
   if (isValidToken(inputValue.value.trim())) {
     const userDate = new Date();
-    setLocalStore("token", { token: inputValue.value.trim(), loginDate: userDate });
+    setLocalStore("user_data", { token: inputValue.value.trim(), loginDate: userDate });
     router.push("/");
   }
 };
