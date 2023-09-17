@@ -1,15 +1,32 @@
-export namespace IEntity {
+export interface SingleBook {
+  id: string;
+  title: string;
+  description: string;
+  buyLink: string;
+  publishDate: string;
+  previewLink: string;
+  image: string;
+  authors: string[];
+  bookLink: string;
+}
+
+export namespace Api {
   export namespace Book {
-    export type List = Single[];
-    export interface Single {
-      id: number;
-      title: string;
-      image: string;
-      description: string;
-      authors: string[];
-      buyLink: string;
-      previewLink: string;
-      publishDate: string;
+    export namespace Single {
+      export type Request = string;
+      export interface Response {
+        data: {
+          items: SingleBook[];
+        };
+      }
+    }
+    export namespace List {
+      export type Request = string;
+      export interface Response {
+        data: {
+          items: SingleBook[];
+        };
+      }
     }
   }
 }

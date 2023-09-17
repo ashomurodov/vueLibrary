@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .books_grid {
+    @apply grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 xl:grid-cols-4 gap-x-10 gap-y-7;
+  }
+}

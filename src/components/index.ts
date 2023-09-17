@@ -1,3 +1,4 @@
-export { default as BookItem } from "./BookItem.vue";
-export { default as LoaderComponent } from "./LoaderComponent.vue";
-export { default as NavbarEl } from "./NavbarEl.vue";
+export { default as Navbar } from "./NavBar.vue";
+export { default as SearchBar } from "./SearchBar.vue";
+export { default as bookItem } from "./bookItem.vue";
+export { default as Loader } from "./LoadingItem.vue";
