@@ -10,7 +10,6 @@ interface State {
   likedBooks: SingleBook[];
   similiarBook: SingleBook[];
   book: SingleBook;
-  userToken: boolean;
   loading: boolean;
   search: string | null;
   hasFetchedFirstTime: boolean;
@@ -33,14 +32,13 @@ export const useBookStore = defineStore("bookStore", {
       bookLink: "",
       isLiked: false,
     },
-    userToken: true,
     loading: false,
     hasFetchedFirstTime: false,
     search: localStorage.getItem("lastSearch") ? localStorage.getItem("lastSearch") : "programming",
   }),
   actions: {
     async fetchBookListOfBooks() {
-      if (this.userToken) {
+      if (!isTokenExpired()) {
         try {
           this.loading = true;
           const { data } = await iApi.fetchBooks(this.search!);
@@ -51,16 +49,16 @@ export const useBookStore = defineStore("bookStore", {
         } finally {
           this.loading = false;
         }
-      } else if (this.userToken === false) {
+      } else if (isTokenExpired()) {
         throw new Error("Your session expired");
       }
     },
 
     async fetchSingleBook(id: string) {
-      if (this.userToken && this.books.length > 0) {
+      if (!isTokenExpired() && this.books.length > 0) {
         const [singleBook] = this.books.filter((book) => book.id === id);
         this.book = singleBook;
-      } else if (this.userToken) {
+      } else if (!isTokenExpired()) {
         try {
           this.loading = true;
           const { data } = await iApi.fetchSingleBook(id);
@@ -75,7 +73,7 @@ export const useBookStore = defineStore("bookStore", {
     },
 
     async fetchSimiliarBook(title: string) {
-      if (this.userToken) {
+      if (!isTokenExpired()) {
         try {
           this.loading = true;
           // const {} = {}
