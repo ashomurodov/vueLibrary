@@ -43,6 +43,12 @@ const handleSubmit = async () => {
     setLocalStore("user_data", { token: inputValue.value.trim(), loginDate: userDate });
     bookStore.loading = false;
     router.push("/");
+  } else {
+    bookStore.loading = true;
+    await timer(2500);
+    alert("Your token is not valid");
+    bookStore.loading = false;
+    inputValue.value = "";
   }
 };
 </script>

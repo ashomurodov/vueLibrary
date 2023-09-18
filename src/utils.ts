@@ -24,7 +24,7 @@ export const isTokenExpired = () => {
 
     const difference = (Number(nowDate) - Number(registeredDate)) / (60 * 1000);
 
-    return difference >= 10;
+    return difference >= 1;
   }
 
   return null;

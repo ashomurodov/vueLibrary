@@ -10,4 +10,5 @@ export const Book = (item: any) => ({
   image: get(item, "volumeInfo.imageLinks.thumbnail") || "",
   authors: get(item, "volumeInfo.authors") || [],
   bookLink: get(item, "selfLink") || "",
+  isLiked: get(item, "isLiked") || false,
 });

@@ -18,6 +18,8 @@ import { useBookStore } from "../stores/books";
 
 const bookStore = useBookStore();
 
+console.log(bookStore.books);
+
 onMounted(() => {
   if (bookStore.hasFetchedFirstTime === false) {
     bookStore.fetchBookListOfBooks();

@@ -67,6 +67,8 @@ import { useBookStore } from "../stores/books";
 const router = useRoute();
 const bookStore = useBookStore();
 
+console.log(bookStore.book);
+
 const watchRouteParams = () => {
   watch(
     () => router.params.id,

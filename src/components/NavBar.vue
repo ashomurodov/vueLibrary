@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-between items-center lg:px-20 px-10 py-5 bg-emerald-100 sticky w-full top-0"
+    class="flex justify-between items-center lg:px-20 px-10 py-5 bg-emerald-100 z-50 sticky w-full top-0"
   >
     <div class="logo">
       <router-link to="/">

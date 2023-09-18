@@ -8,6 +8,7 @@ export interface SingleBook {
   image: string;
   authors: string[];
   bookLink: string;
+  isLiked: boolean;
 }
 
 export namespace Api {

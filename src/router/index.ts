@@ -48,6 +48,7 @@ router.beforeEach((to, from, next) => {
       if (!isTokenExpired()) {
         next();
       } else {
+        alert("Your token is expired pls re-signIn");
         next("/login");
       }
     } else {
