@@ -27,6 +27,7 @@ export const useBookStore = defineStore("bookStore", {
       image: "",
       authors: [],
       bookLink: "",
+      isLiked: false,
     },
     userToken: true,
     loading: false,
