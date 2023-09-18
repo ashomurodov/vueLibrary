@@ -27,7 +27,7 @@
         <img
           :src="book?.isLiked ? heartTrue : heartFalse"
           class="cursor-pointer"
-          @click="() => console.log('clickedlike')"
+          @click="bookStore.addLikedBooks(book?.id!)"
           alt="heart"
         />
       </div>
@@ -41,6 +41,10 @@ import { type SingleBook } from "../types";
 
 import heartTrue from "@/assets/heart-true.png";
 import heartFalse from "@/assets/heart-false.png";
+
+import { useBookStore } from "@/stores/books";
+
+const bookStore = useBookStore();
 
 const props = defineProps({
   book: Object as () => SingleBook,

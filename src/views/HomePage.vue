@@ -5,7 +5,17 @@
       <Loader />
     </div>
     <div :class="bookStore.loading ? 'hidden' : ''" class="books_container books_grid">
-      <bookItem v-for="book in bookStore.books" :key="book.id" :book="book" />
+      <template v-if="bookStore?.books?.length > 0">
+        <bookItem v-for="book in bookStore.books" :key="book.id" :book="book" />
+      </template>
+      <template v-else>
+        <span class="h-4/5 w-screen grid place-items-center pt-5">
+          <p class="text-xl lg:text-3xl text-center text-gray-500">
+            Not Found :( <br />
+            Please search another book...
+          </p>
+        </span>
+      </template>
     </div>
   </div>
 </template>

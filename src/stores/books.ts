@@ -5,6 +5,7 @@ import type { SingleBook } from "@/types";
 
 interface State {
   books: SingleBook[];
+  likedBooks: SingleBook[];
   similiarBook: SingleBook[];
   book: SingleBook;
   userToken: boolean;
@@ -17,6 +18,7 @@ export const useBookStore = defineStore("bookStore", {
   state: (): State => ({
     books: [],
     similiarBook: [],
+    likedBooks: [],
     book: {
       id: "",
       title: "",
@@ -40,7 +42,8 @@ export const useBookStore = defineStore("bookStore", {
         try {
           this.loading = true;
           const { data } = await iApi.fetchBooks(this.search!);
-          this.books = data.items.map((item) => Mapper.Book(item));
+          console.log(data);
+          this.books = data?.items?.map((item) => Mapper.Book(item));
         } catch (error) {
           console.log(error);
         } finally {
@@ -80,6 +83,19 @@ export const useBookStore = defineStore("bookStore", {
           this.loading = false;
         }
       }
+    },
+
+    addLikedBooks(id: string) {
+      const [likedBook] = this.books.filter((book) => book.id === id);
+      if (likedBook.isLiked) {
+        likedBook.isLiked = false;
+        this.likedBooks = this.books.filter((book) => book.isLiked);
+      } else {
+        likedBook.isLiked = true;
+        this.likedBooks = this.books.filter((book) => book.isLiked);
+      }
+
+      console.log(this.likedBooks);
     },
   },
 });

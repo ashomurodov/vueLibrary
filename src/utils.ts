@@ -1,3 +1,5 @@
+import router from "./router";
+
 export const isValidToken = (token: string) => {
   const pattern = /^[a-zA-Z]{16}$/;
 
@@ -24,7 +26,7 @@ export const isTokenExpired = () => {
 
     const difference = (Number(nowDate) - Number(registeredDate)) / (60 * 1000);
 
-    return difference >= 1;
+    return difference >= 3;
   }
 
   return null;
@@ -36,4 +38,12 @@ export const timer = async (time: number) => {
       res("something is happening");
     }, time)
   );
+};
+
+export const logOut = () => {
+  const isConfirmed = confirm("Tizimdan chiqishga rozimisiz?");
+  if (isConfirmed) {
+    localStorage.removeItem("user_data");
+    router.push("/login");
+  }
 };

@@ -10,9 +10,16 @@
         <p class="text-black block sm:hidden text-2xl">R<span class="text-emerald-600">Z!</span></p>
       </router-link>
     </div>
+
     <div class="flex justify-center items-center py-3">
+      <div class="flex gap-2 bg-white p-2 relative rounded-md cursor-pointer mr-4">
+        <router-link to="/book/liked">
+          <span>Yoqtirilgan</span>
+        </router-link>
+        <img :src="bookStore.likedBooks.length ? heartTrue : heartFalse" alt="heart" />
+      </div>
       <SearchBar />
-      <img class="ml-3 cursor-pointer" @click="handleSubmit" :src="logout" alt="logout" />
+      <img class="ml-3 cursor-pointer" @click="logOut" :src="logout" alt="logout" />
     </div>
   </div>
 </template>
@@ -20,13 +27,13 @@
 <script setup lang="ts">
 import { SearchBar } from ".";
 import logout from "@/assets/logouticon.png";
-import router from "@/router";
 
-const handleSubmit = () => {
-  const isConfirmed = confirm("Tizimdan chiqishga rozimisiz?");
-  if (isConfirmed) {
-    localStorage.removeItem("user_data");
-    router.push("/login");
-  }
-};
+import { logOut } from "@/utils";
+
+import { useBookStore } from "@/stores/books";
+
+import heartTrue from "@/assets/heart-true.png";
+import heartFalse from "@/assets/heart-false.png";
+
+const bookStore = useBookStore();
 </script>

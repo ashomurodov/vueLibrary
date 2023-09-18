@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { HomePage, SingleBookPage } from "@/views";
+import { HomePage, LikedBooksPage, SingleBookPage } from "@/views";
 
 import { isTokenExpired } from "@/utils";
 
@@ -20,6 +20,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       // component: () => import("../views/AboutView.vue"),
       component: SingleBookPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/book/liked",
+      name: "likedBooks",
+      component: LikedBooksPage,
       meta: { requiresAuth: true },
     },
     {
