@@ -16,6 +16,14 @@
       <div class="lg:w-3/4 italic mt-3">
         <div class="book_details">
           <p>
+            <router-link to="/book/liked" :class="bookStore.book.isLiked ? 'block' : 'hidden'">
+              <button
+                class="italic cursor-pointer text-emerald-700 bg-emerald-50 font-bold py-1 px-6 rounded-md mb-3 ring-emerald-700 ring-offset-2 ring-2"
+              >
+                Liked ✔️
+              </button>
+            </router-link>
+            <br />
             <span class="text-emerald-950 font-bold text-xl mr-3">Authors: </span>
             <span
               class="mr-3"
