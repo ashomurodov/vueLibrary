@@ -50,7 +50,8 @@ export const useBookStore = defineStore("bookStore", {
           this.loading = false;
         }
       } else if (isTokenExpired()) {
-        throw new Error("Your session expired");
+        alert("Token expired");
+        router.push("/login");
       }
     },
 
@@ -62,13 +63,15 @@ export const useBookStore = defineStore("bookStore", {
         try {
           this.loading = true;
           const { data } = await iApi.fetchSingleBook(id);
-          console.log(data);
           this.book = Mapper.Book(data);
         } catch (error) {
           console.log(error);
         } finally {
           this.loading = false;
         }
+      } else if (isTokenExpired()) {
+        alert("Token is expired");
+        router.push("/login");
       }
     },
 
