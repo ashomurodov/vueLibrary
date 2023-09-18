@@ -2,6 +2,8 @@ import { iApi } from "@/service";
 import { defineStore } from "pinia";
 import { Mapper } from "@/service";
 import type { SingleBook } from "@/types";
+import { isTokenExpired } from "@/utils";
+import router from "@/router";
 
 interface State {
   books: SingleBook[];
@@ -86,13 +88,18 @@ export const useBookStore = defineStore("bookStore", {
     },
 
     addLikedBooks(id: string) {
-      const [likedBook] = this.books.filter((book) => book.id === id);
-      if (likedBook.isLiked) {
-        likedBook.isLiked = false;
-        this.likedBooks = this.books.filter((book) => book.isLiked);
+      if (!isTokenExpired()) {
+        const [likedBook] = this.books.filter((book) => book.id === id);
+        if (likedBook.isLiked) {
+          likedBook.isLiked = false;
+          this.likedBooks = this.books.filter((book) => book.isLiked);
+        } else {
+          likedBook.isLiked = true;
+          this.likedBooks = this.books.filter((book) => book.isLiked);
+        }
       } else {
-        likedBook.isLiked = true;
-        this.likedBooks = this.books.filter((book) => book.isLiked);
+        alert("Your token expired pls resignIn");
+        router.push("/login");
       }
 
       console.log(this.likedBooks);
