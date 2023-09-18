@@ -25,7 +25,7 @@ import router from "@/router";
 const handleSubmit = () => {
   const isConfirmed = confirm("Tizimdan chiqishga rozimisiz?");
   if (isConfirmed) {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user_data");
     router.push("/login");
   }
 };

@@ -13,7 +13,14 @@
             v-model="inputValue"
           />
         </label>
-        <button class="bg-emerald-600 text-white rounded-md" type="submit">Submit</button>
+        <button
+          class="bg-emerald-600 text-white rounded-md"
+          type="submit"
+          :disabled="bookStore.loading"
+          :class="bookStore.loading ? 'cursor-wait bg-gray-200' : ''"
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>
@@ -21,15 +28,20 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { isValidToken, setLocalStore } from "@/utils";
+import { isValidToken, setLocalStore, timer } from "@/utils";
+import { useBookStore } from "../stores/books";
 import router from "@/router";
 
 const inputValue = ref("");
+const bookStore = useBookStore();
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   if (isValidToken(inputValue.value.trim())) {
+    bookStore.loading = true;
+    await timer(2500);
     const userDate = new Date();
     setLocalStore("user_data", { token: inputValue.value.trim(), loginDate: userDate });
+    bookStore.loading = false;
     router.push("/");
   }
 };

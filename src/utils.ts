@@ -29,3 +29,11 @@ export const isTokenExpired = () => {
 
   return null;
 };
+
+export const timer = async (time: number) => {
+  await new Promise((res) =>
+    setTimeout(() => {
+      res("something is happening");
+    }, time)
+  );
+};
