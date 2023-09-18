@@ -35,8 +35,10 @@ router.beforeEach((to, from, next) => {
     localStorage.getItem("user_data")!
   );
 
+  console.log(isTokenExpired());
+
   if (to.path === "/login") {
-    if (!localStorage.getItem("user_data")) {
+    if (!localStorage.getItem("user_data") || isTokenExpired()) {
       next();
     } else {
       next("/");
@@ -45,6 +47,8 @@ router.beforeEach((to, from, next) => {
     if (userIsRegistered && userIsRegistered.token) {
       if (!isTokenExpired()) {
         next();
+      } else {
+        next("/login");
       }
     } else {
       next("/login");
