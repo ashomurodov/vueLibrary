@@ -41,9 +41,6 @@ export const timer = async (time: number) => {
 };
 
 export const logOut = () => {
-  const isConfirmed = confirm("Tizimdan chiqishga rozimisiz?");
-  if (isConfirmed) {
-    localStorage.removeItem("user_data");
-    router.push("/login");
-  }
+  localStorage.removeItem("user_data");
+  router.push("/login");
 };
