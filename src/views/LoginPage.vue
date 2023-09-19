@@ -8,6 +8,7 @@
         <label>
           <input
             class="outline-none border-2 p-1 rounded-md"
+            :class="!!errors.token ? 'border-red-600' : ''"
             placeholder="Write your token"
             type="text"
             v-bind="token"
