@@ -35,8 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { isValidToken, setLocalStore, timer } from "@/utils";
+import { setLocalStore, timer } from "@/utils";
 import { useBookStore } from "../stores/books";
 import router from "@/router";
 
@@ -70,21 +69,4 @@ const handleSubmit = async () => {
 };
 
 const bookStore = useBookStore();
-
-// const handleSubmit = async () => {
-//   if (isValidToken(inputValue.value.trim())) {
-//     bookStore.loading = true;
-//     await timer(2500);
-//     const userDate = new Date();
-//     setLocalStore("user_data", { token: inputValue.value.trim(), loginDate: userDate });
-//     bookStore.loading = false;
-//
-//   } else {
-//     bookStore.loading = true;
-//     await timer(2500);
-//     alert("Your token is not valid");
-//     bookStore.loading = false;
-//     inputValue.value = "";
-//   }
-// };
 </script>

@@ -1,11 +1,5 @@
 import router from "./router";
 
-export const isValidToken = (token: string) => {
-  const pattern = /^[a-zA-Z]{16}$/;
-
-  return pattern.test(token);
-};
-
 export interface TokenType {
   token: string;
   expDate: string;
