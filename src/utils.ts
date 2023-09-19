@@ -5,6 +5,8 @@ export interface TokenType {
   expDate: string;
 }
 
+// comment for test git
+
 export const setLocalStore = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
