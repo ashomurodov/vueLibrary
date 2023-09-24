@@ -1,6 +1,6 @@
 import { test, expect, describe, beforeEach, afterEach, it, vi } from "vitest";
 
-import { isValidToken, setLocalStore, isTokenExpired, timer } from "../utils";
+import { isValidToken, setLocalStore, isTokenExpired, timer } from "@/utils";
 
 test("Token is valid", () => {
   expect(isValidToken("Ayyub")).toEqual(false);

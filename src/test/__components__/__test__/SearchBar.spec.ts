@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/vue";
 import { describe, it, expect, vi, test } from "vitest";
 import { mount } from "@vue/test-utils";
 
-import { SearchBar } from "..";
+import { SearchBar } from "../../../components";
 import { useBookStore } from "@/stores/books";
 
 describe("SearchBar", () => {

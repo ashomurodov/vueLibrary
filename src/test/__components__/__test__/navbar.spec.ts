@@ -2,7 +2,7 @@ import { describe, it, expect, vi, test, beforeEach, afterEach } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
 import { mount } from "@vue/test-utils";
 
-import { Navbar } from "..";
+import { Navbar } from "@/components";
 
 describe("navbar", () => {
   beforeEach(() => {

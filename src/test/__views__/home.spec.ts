@@ -1,9 +1,8 @@
 import { mount, shallowMount } from "@vue/test-utils";
-import { HomePage } from "@/views"; // Adjust the import path as needed
+import { HomePage } from "@/views";
 
 import { describe, it, expect, beforeEach } from "vitest";
 import { createPinia, setActivePinia } from "pinia";
-import { useBookStore } from "@/stores/books";
 
 describe("YourComponent", () => {
   beforeEach(() => {

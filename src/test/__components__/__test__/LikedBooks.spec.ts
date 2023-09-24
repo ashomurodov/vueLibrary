@@ -1,9 +1,7 @@
-import { render, screen } from "@testing-library/vue";
 import { describe, it, expect, vi, test } from "vitest";
 import { mount } from "@vue/test-utils";
 
-import { LikedBookNav } from "..";
-import { useBookStore } from "@/stores/books";
+import { LikedBookNav } from "@/components";
 
 describe("SearchBar", () => {
   it("render Liked book Navbar", async () => {

@@ -1,5 +1,5 @@
 import { describe, expect, beforeEach, test } from "vitest";
-import { bookItem } from "..";
+import { bookItem } from "@/components";
 
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
