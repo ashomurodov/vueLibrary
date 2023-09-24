@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { HomePage, LikedBooksPage, SingleBookPage } from "@/views";
 
-import { isTokenExpired } from "@/utils";
+import { isTokenExpired, isUserCanAccessMainPage } from "@/utils";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,30 +33,19 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const userDataString = localStorage.getItem("user_data");
+  const accessToMainPages = isUserCanAccessMainPage();
 
   if (to.path === "/login") {
-    if (!userDataString || isTokenExpired()) {
+    if (!accessToMainPages) {
       next();
     } else {
       next("/");
     }
   } else if (to.meta.requiresAuth) {
-    if (userDataString) {
-      try {
-        const userIsRegistered = JSON.parse(userDataString);
-        if (userIsRegistered && userIsRegistered.token && !isTokenExpired()) {
-          next();
-        } else {
-          alert("Your token is expired, please sign in again");
-          next("/login");
-        }
-      } catch (error) {
-        console.error("Error parsing user data:", error);
-        next("/login"); // Handle invalid JSON data
-      }
+    if (accessToMainPages) {
+      next();
     } else {
-      next("/login"); // Handle the case where user data is not present
+      next("/login");
     }
   } else {
     next();

@@ -23,6 +23,8 @@ export const isTokenExpired = (
     localStorage.getItem("user_data")!
   );
 
+  console.log(userIsRegistered);
+
   if (userIsRegistered || userRegisteredTest) {
     const nowDate = betaNowDate !== "" ? new Date(betaNowDate) : new Date();
     const registeredDate =
@@ -49,4 +51,19 @@ export const timer = async (time: number): Promise<string> => {
 export const logOut = () => {
   localStorage.removeItem("user_data");
   router.push("/login");
+};
+
+export const isUserCanAccessMainPage = () => {
+  const userData = JSON.parse(localStorage.getItem("user_data")!);
+  if (userData) {
+    const tokenIsExpired = isTokenExpired();
+
+    if (tokenIsExpired) {
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    return false;
+  }
 };

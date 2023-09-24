@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <LikedBookNav />
   <div class="loader" :class="bookStore.loading ? 'block' : 'hidden'">
     <Loader />
   </div>
@@ -69,7 +69,7 @@
 import { onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import { Navbar, Loader, bookItem } from "@/components";
+import { LikedBookNav, Loader, bookItem } from "@/components";
 import { useBookStore } from "../stores/books";
 
 const router = useRoute();

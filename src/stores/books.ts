@@ -64,6 +64,7 @@ export const useBookStore = defineStore("bookStore", {
         }
       } else if (isTokenExpired()) {
         alert("Token expired");
+        localStorage.removeItem("user_data");
         router.push("/login");
       }
     },
@@ -84,6 +85,7 @@ export const useBookStore = defineStore("bookStore", {
         }
       } else if (isTokenExpired()) {
         alert("Token is expired");
+        localStorage.removeItem("user_data");
         router.push("/login");
       }
     },
@@ -113,6 +115,7 @@ export const useBookStore = defineStore("bookStore", {
         }
       } else {
         alert("Your token expired pls resignIn");
+        localStorage.removeItem("user_data");
         router.push("/login");
       }
 

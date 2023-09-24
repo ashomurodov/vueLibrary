@@ -16,7 +16,11 @@
         <router-link to="/book/liked">
           <span id="likedNavComp">Yoqtirilgan</span>
         </router-link>
-        <img :src="props.likedBooks?.length ? heartTrue : heartFalse" alt="heart" />
+        <img
+          :src="props.likedBooks?.length ? heartTrue : heartFalse"
+          :class="props.likedBooks.length ? 'heart_is_true' : 'heart_is_false'"
+          alt="heart"
+        />
       </div>
       <SearchBar :search="props.search" />
       <button id="logOutbtn" @click="logOut">

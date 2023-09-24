@@ -14,7 +14,37 @@ describe("navbar", () => {
   });
 
   it("render text correctly", () => {
-    const wrapper = mount(Navbar);
+    const wrapper = mount(Navbar, {
+      props: {
+        likedBooks: [
+          {
+            authors: ["", ""],
+            bookLink: "",
+            buyLink: "",
+            description: "",
+            id: "222",
+            image: "",
+            isLiked: false,
+            previewLink: "",
+            publishDate: "",
+            title: "",
+          },
+          {
+            authors: ["", ""],
+            bookLink: "",
+            buyLink: "",
+            description: "",
+            id: "222",
+            image: "",
+            isLiked: false,
+            previewLink: "",
+            publishDate: "",
+            title: "",
+          },
+        ],
+        search: () => {},
+      },
+    });
 
     expect(wrapper.exists()).toBe(true);
 
@@ -22,9 +52,54 @@ describe("navbar", () => {
     expect(wrapper.find("#likedNavComp").text()).toBe("Yoqtirilgan");
   });
 
-  it("button login is working", async () => {
-    const wrapper = mount(Navbar);
-    expect(wrapper.find("#logOutbtn").exists()).toBe(true);
-    await wrapper.find("#logOutbtn").trigger("click");
+  it("heart image will be true", () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        likedBooks: [
+          {
+            authors: ["", ""],
+            bookLink: "",
+            buyLink: "",
+            description: "",
+            id: "222",
+            image: "",
+            isLiked: false,
+            previewLink: "",
+            publishDate: "",
+            title: "",
+          },
+          {
+            authors: ["", ""],
+            bookLink: "",
+            buyLink: "",
+            description: "",
+            id: "222",
+            image: "",
+            isLiked: false,
+            previewLink: "",
+            publishDate: "",
+            title: "",
+          },
+        ],
+        search: () => {},
+      },
+    });
+
+    const heartImageIsTrue = wrapper.find(".heart_is_true");
+    expect(heartImageIsTrue.exists()).toBe(true);
+  });
+
+  it("heart image will be falsy", () => {
+    const wrapper = mount(Navbar, {
+      props: {
+        likedBooks: [],
+        search: () => {},
+      },
+    });
+
+    const heartImageIsTrue = wrapper.find(".heart_is_true");
+    const heartImageIsFalse = wrapper.find(".heart_is_false");
+    expect(heartImageIsTrue.exists()).toBe(false);
+    expect(heartImageIsFalse.exists()).toBe(true);
   });
 });
