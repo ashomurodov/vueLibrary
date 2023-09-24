@@ -1,4 +1,4 @@
-3import axios, { isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 import { test, describe, expect } from "vitest";
 import { iApi } from "@/service";
 import type { Api } from "@/types";
@@ -67,3 +67,4 @@ describe("Test fetch API", () => {
     expect(response.status).toEqual(200);
     expect(response.data.items).toBeTruthy();
   });
+});
