@@ -18,6 +18,7 @@ export default defineConfig({
     coverage: {
       provider: "istanbul",
       enabled: true,
+      exclude: ["**/src/stores/**", "**/src/views/**"],
     },
     reporters: ["html"],
   },
