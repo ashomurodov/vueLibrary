@@ -1,5 +1,6 @@
 import "./assets/main.css";
 
+// @vites-enviroment global
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 

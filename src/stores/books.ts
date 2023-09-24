@@ -3,6 +3,7 @@ import { Mapper, iApi } from "@/service";
 import type { SingleBook } from "@/types";
 import { isTokenExpired } from "@/utils";
 import router from "@/router";
+import { reactive } from "vue";
 
 interface State {
   books: SingleBook[];
@@ -13,6 +14,19 @@ interface State {
   search: string | null;
   hasFetchedFirstTime: boolean;
 }
+
+// export const useBookStore = defineStore("bookStore", () => {
+//   const state: State = reactive({
+//     books: [],
+//     similiarBook: [],
+//   });
+
+//   const setBooks = () => {
+//     const book = { id: 1, name: "hello" };
+
+//     state.books.push(book);
+//   };
+// });
 
 export const useBookStore = defineStore("bookStore", {
   state: (): State => ({

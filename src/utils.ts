@@ -5,20 +5,30 @@ export interface TokenType {
   expDate: string;
 }
 
-// comment for test git
+export const isValidToken = (token: string) => {
+  const pattern = /^[a-zA-Z]{16}$/;
+  return pattern.test(token);
+};
 
 export const setLocalStore = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const isTokenExpired = () => {
+export const isTokenExpired = (
+  betaNowDate = "",
+  betaRegisteredDate = "",
+  userRegisteredTest = false
+) => {
   const userIsRegistered: { token: string; loginDate: string } = JSON.parse(
     localStorage.getItem("user_data")!
   );
 
-  if (userIsRegistered) {
-    const nowDate = new Date();
-    const registeredDate = new Date(userIsRegistered.loginDate);
+  if (userIsRegistered || userRegisteredTest) {
+    const nowDate = betaNowDate !== "" ? new Date(betaNowDate) : new Date();
+    const registeredDate =
+      betaRegisteredDate !== ""
+        ? new Date(betaRegisteredDate)
+        : new Date(userIsRegistered.loginDate);
 
     const difference = (Number(nowDate) - Number(registeredDate)) / (60 * 1000);
 
@@ -28,8 +38,8 @@ export const isTokenExpired = () => {
   return null;
 };
 
-export const timer = async (time: number) => {
-  await new Promise((res) =>
+export const timer = async (time: number): Promise<string> => {
+  return new Promise((res, rej) =>
     setTimeout(() => {
       res("something is happening");
     }, time)

@@ -16,14 +16,14 @@ export namespace Api {
     export namespace Single {
       export type Request = string;
       export interface Response {
-        data: {
-          items: SingleBook[];
-        };
+        status: number;
+        data: [];
       }
     }
     export namespace List {
       export type Request = string;
       export interface Response {
+        status: number;
         data: {
           items: SingleBook[];
         };

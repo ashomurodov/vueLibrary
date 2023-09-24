@@ -14,8 +14,13 @@
     </div>
 
     <div class="flex justify-center items-center py-3">
-      <SearchBar />
-      <img class="ml-3 cursor-pointer" @click="logOut" :src="logOutIcon" alt="logout" />
+      <img
+        class="ml-3 cursor-pointer"
+        id="logoutimg"
+        @click="logOut"
+        :src="logOutIcon"
+        alt="logout"
+      />
     </div>
   </div>
 </template>

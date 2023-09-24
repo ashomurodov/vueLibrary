@@ -14,26 +14,31 @@
     <div class="flex justify-center items-center py-3">
       <div class="flex gap-2 bg-white p-2 relative rounded-md cursor-pointer mr-4">
         <router-link to="/book/liked">
-          <span>Yoqtirilgan</span>
+          <span id="likedNavComp">Yoqtirilgan</span>
         </router-link>
-        <img :src="bookStore.likedBooks.length ? heartTrue : heartFalse" alt="heart" />
+        <img :src="props.likedBooks?.length ? heartTrue : heartFalse" alt="heart" />
       </div>
-      <SearchBar />
-      <img class="ml-3 cursor-pointer" @click="logOut" :src="logout" alt="logout" />
+      <SearchBar :search="props.search" />
+      <button id="logOutbtn" @click="logOut">
+        <img class="ml-3 cursor-pointer" :src="logout" alt="logout" />
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { SearchBar } from ".";
-import logout from "@/assets/logouticon.png";
-
 import { logOut } from "@/utils";
+import { SearchBar } from ".";
 
-import { useBookStore } from "@/stores/books";
+interface NavProps {
+  likedBooks: SingleBook[];
+  search: (search: any) => void;
+}
 
+const props = defineProps<NavProps>();
+
+import logout from "@/assets/logouticon.png";
 import heartTrue from "@/assets/heart-true.png";
 import heartFalse from "@/assets/heart-false.png";
-
-const bookStore = useBookStore();
+import type { SingleBook } from "@/types";
 </script>

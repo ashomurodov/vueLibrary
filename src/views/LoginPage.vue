@@ -34,7 +34,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { setLocalStore, timer } from "@/utils";
 import { useBookStore } from "../stores/books";
@@ -59,7 +58,6 @@ const handleSubmit = async () => {
     await submitForm();
     bookStore.loading = true;
     await timer(2000);
-    console.log(token.value.value);
     const userDate = new Date();
     setLocalStore("user_data", { token: token.value.value, loginDate: userDate });
     bookStore.loading = false;
