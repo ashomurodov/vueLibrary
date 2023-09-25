@@ -35,7 +35,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { setLocalStore, timer } from "@/utils";
+import { isValidToken, setLocalStore, timer } from "@/utils";
 import { useBookStore } from "../stores/books";
 import router from "@/router";
 
@@ -59,9 +59,11 @@ const handleSubmit = async () => {
     bookStore.loading = true;
     await timer(2000);
     const userDate = new Date();
-    setLocalStore("user_data", { token: token.value.value, loginDate: userDate });
+    if (isValidToken(token.value.value)) {
+      setLocalStore("user_data", { token: token.value.value, loginDate: userDate });
+      router.push("/");
+    }
     bookStore.loading = false;
-    router.push("/");
   } catch (error) {
     console.error("Form validation failed:", error);
   }
