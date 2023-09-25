@@ -25,7 +25,7 @@ describe("Test fetch API", () => {
     expect(response.status).toEqual(200);
     expect(response.data.items).toBeTruthy();
   });
-
+  
   test("GET single book", async () => {
     const response: Api.Book.Single.Response = {
       data: [],
